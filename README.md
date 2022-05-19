@@ -16,6 +16,10 @@ Example of wled devices picked up by soundswitch on pc or Denon DJ hardware such
 Final configuration tweaks to make WLED work in "Effect mode", you would have contol of effect, speed, color using attribute flag in sound switch.
 ![162794864-2bb994d2-0683-4829-b67c-9973fafe42e8](https://user-images.githubusercontent.com/41810641/169350928-1194e99c-b823-4c44-a9a4-ca4656dcad61.png)
 
+Example of attribute use in sound switch to control wleds effect properties:
+![image](https://user-images.githubusercontent.com/41810641/169354746-960ad703-395e-4000-a595-8516c80a514f.png)
+
+
 
 
 If you ask why? I am an engineer (network), and DJ+lightning is my hobby where i like to spend my spare time, some videos of my DIY lights...:
