@@ -314,6 +314,7 @@ while True:
         print("sent")
         for adv_ip in LIST_OF_IPs_FOR_ADVERTISMENT:
             a.send_pollreply(a.pollreplay(adv_ip))
+    time.sleep(1)
 #if __name__ == "__main__":
 #    artnet_receiver()
 
