@@ -4,6 +4,8 @@ from socket import (socket,inet_aton, AF_INET, SOL_SOCKET, SOCK_DGRAM, SO_BROADC
 from struct import unpack, pack, pack_into
 import random
 import threading
+from zeroconf import ServiceBrowser, ServiceListener, Zeroconf
+
 # In case soundswitch is running on different pc you can leave "0.0.0.0",
 # but in case its on the same machine, you need to have adittional interface,
 # could be logical one (loopback), and then you need to define here ip of that interface.
@@ -18,18 +20,56 @@ UDP_PORT = 6454 #0x1936 # Art-net is supposed to only use this port
 BROADCAST_IP = "10.4.20.127"
 #BROADCAST_IP = "255.255.255.255"
 
+# Autodiscovery feature for WLED,
+# hostname has to contain 'wled' keyword to be detected....
+# if thats enabled - all discovered IP's will be added to a IP List.
+WLED_AUTODISCOVERY=True
 
 
 # list of ip's which you want soundswitch would detect as Artnet/DMX nodes
 LIST_OF_IPs_FOR_ADVERTISMENT = [
 #    "10.4.20.22",
 #    "10.4.20.28",
-   "10.4.20.29",
-   "10.4.20.140",
+#   "10.4.20.29",
+#   "10.4.20.140",
 #    "10.4.20.14",
 #    "10.4.20.40",
 #    "10.4.20.41"
 ]
+
+class MyListener(ServiceListener):
+
+    wled_ip_list=[]
+    def update_service(self, zc: Zeroconf, type_: str, name: str) -> None:
+        #print(f"Service {name} updated")
+        pass
+    def remove_service(self, zc: Zeroconf, type_: str, name: str) -> None:
+        #print(f"Service {name} removed")
+        pass
+    def add_service(self, zc: Zeroconf, type_: str, name: str) -> None:
+
+        info = zc.get_service_info(type_, name)
+        #print(f"Service {name} added, service info: {info}")
+        if "wled" in str(name).lower():
+          self.wled_ip_list.append(inet_ntoa(info.addresses[0]))
+        #print(inet_ntoa(info.addresses[0]))
+        #print(self.wled_ip_list)
+
+if WLED_AUTODISCOVERY:
+    print("Autodiscovery for WLED is enabled...")
+    zeroconf = Zeroconf()
+    listener = MyListener()
+    browser = ServiceBrowser(zeroconf, "_http._tcp.local.", listener)
+    #print(listener.wled_ip_list)
+    time.sleep(5)
+    for ip in listener.wled_ip_list:
+        LIST_OF_IPs_FOR_ADVERTISMENT.append(ip)
+    print(f"Found following IP's:{listener.wled_ip_list}")
+    zeroconf.close()
+
+
+
+
 
 class ArtnetPacket:
  
