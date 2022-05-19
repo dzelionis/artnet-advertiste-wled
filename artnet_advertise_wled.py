@@ -332,7 +332,7 @@ def artnet_receiver(UNIV=None, callBack=None):
             sys.exit()
 
 
-def cb():
+def cb(data):
     pass
 
 def arntet_worker():
