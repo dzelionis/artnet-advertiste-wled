@@ -10,3 +10,7 @@ tested on windows/linux
 
 added Autodiscovery for wled nodes....
 
+If you ask why? I am an engineer, i DJ+lightning its my hobby where i like to spend my spare time, some videos of my DIY lights...:
+https://drive.google.com/drive/folders/1wTOyHKRTKP8_p7d73bdmYTKmweb978kM?usp=sharing
+
+Enjoy
