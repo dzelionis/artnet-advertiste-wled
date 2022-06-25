@@ -1,4 +1,4 @@
-# UPDATE: wled has pool replay working natively, no need for script anymore, please check https://github.com/Aircoookie/WLED/issues/417 for more info.
+# UPDATE: wled has poll replay working natively, no need for script anymore, please check https://github.com/Aircoookie/WLED/issues/417 for more info.
 
 # artnet-advertiste-wled
 Artnet/DMX  advertise POOL  packets for  other devices, would work with Soundswitch/Wled/Resolume and other software...
